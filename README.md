@@ -1,10 +1,11 @@
 ## Information
 
+[![PyPI](https://img.shields.io/pypi/v/pylpconcat.svg)](https://pypi.org/project/pylpconcat)
+[![PyPI](https://img.shields.io/pypi/format/pylpconcat.svg)]()
+[![PyPI](https://img.shields.io/pypi/pyversions/pylpconcat.svg)]()
+
 **pylpconcat** is a plugin for [Pylp](https://github.com/pylp/pylp) that can concatenate
 file contents.
-
-**Note**: due to Pylp's asynchronous piping system, the order of the files concatenated
-is undefined. This will be fix in the next version.
 
 
 ## Installation
@@ -33,7 +34,7 @@ pylp.task('scripts', lambda:
 )
 ```
 
-Moreover, you can specify the separator to add between files:
+Moreover, you can specify the separator to add between files (`\n` by default):
 
 ```python
 import pylp

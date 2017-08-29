@@ -6,10 +6,7 @@ PylpConcat
 Information
 ===========
 
-| **pylpconcat** is a plugin for `Pylp`_ that can concatenate file contents.
-|
-| **Note**: due to Pylp's asynchronous piping system, the order of the files concatenated
-  is undefined. This will be fix in the next version.
+**pylpconcat** is a plugin for `Pylp`_ that can concatenate file contents.
 
 
 Installation
@@ -40,7 +37,7 @@ The usual use of **pylpconcat** is as follows:
           .pipe(pylp.dest('dist'))
     )
 
-Moreover, you can specify the separator to add between files:
+Moreover, you can specify the separator to add between files (``\n`` by default):
 
 .. code:: python
 
