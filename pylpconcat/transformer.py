@@ -20,34 +20,34 @@ class concat(pylp.Transformer):
 		self.filename = filename
 		self.sep = options.get('sep', '\n')
 
-		self.first_file = None
-		self.buffer = ''
+		self.files = []
 
 
 	# Function called when a file need to be transformed
 	async def transform(self, file):
-		# Ignore empty files
-		if not file.contents:
-			return
-
-		# Store the first file for cloning it
-		if not self.first_file:
-			self.first_file = file
-		
-		# Add the contents
-		self.buffer += file.contents + self.sep
+		if file.contents:
+			self.files.append(file)
 
 
 	# Function called when all files are transformed
 	async def flush(self):
-		# No files contatenated
-		if not self.first_file:
+		# No files to concatenate
+		if len(self.files) == 0:
 			return
 
+		# Sort files
+		self.files.sort(key=lambda file: file.order)
+
+		# Concat contents
+		buffer = ""
+		for file in self.files:
+			buffer += file.contents + self.sep
+
 		# Append the result file into the stream
+		file = self.files[0]
 		self.append(pylp.File(
-			os.path.join(self.first_file.cwd, self.filename),
-			contents = self.buffer,
-			cwd = self.first_file.cwd,
-			base = self.first_file.base
+			os.path.join(file.base, self.filename),
+			contents = buffer,
+			cwd = file.cwd,
+			base = file.base
 		))
